@@ -5,7 +5,7 @@ const path = require("path");
 const app = express();
 
 // Serve static files from the correct Angular dist directory
-const distPath = path.join(__dirname, "dist", "revive-restore-reno");
+const distPath = path.join(__dirname, "dist", "revive_restore_reno", "browser");
 app.use(express.static(distPath));
 
 // For all GET requests, send back index.html so that PathLocationStrategy can be used
