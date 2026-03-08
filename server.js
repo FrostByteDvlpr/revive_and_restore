@@ -11,7 +11,7 @@ app.use(express.static(path.join(__dirname, "dist")));
 app.get(/(.*)/, (req, res) => {
   if (!req.path.includes(".")) {
     res.sendFile(
-      path.join(__dirname, "dist/dev_sec_consulting/browser/index.html"),
+      path.join(__dirname, "dist/revive_restore_reno/browser/index.html"),
     );
   } else {
     res.status(404).end();
