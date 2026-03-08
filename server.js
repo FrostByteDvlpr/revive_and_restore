@@ -4,10 +4,11 @@ const path = require("path");
 
 const app = express();
 
-// Serve static files from dist
-app.use(express.static(path.join(__dirname, "dist")));
+// Serve static files from the correct Angular dist directory
+const distPath = path.join(__dirname, "dist", "revive-restore-reno");
+app.use(express.static(distPath));
 
-// All other routes should redirect to the Angular app
+// For all GET requests, send back index.html so that PathLocationStrategy can be used
 app.get(/(.*)/, (req, res) => {
   if (!req.path.includes(".")) {
     res.sendFile(
