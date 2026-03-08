@@ -1,9 +1,6 @@
 # .slugignore for Heroku
 
 node_modules
-src
-angular.json
-tsconfig*.json
 README.md
-*.log
+\*.log
 server-package.json
