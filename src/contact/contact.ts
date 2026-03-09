@@ -45,6 +45,28 @@ import { Component } from '@angular/core';
             <input id="email" name="email" type="email" required />
           </div>
           <div class="form-group">
+            <label for="reason">Reason</label>
+            <ul class="radios">
+              <li>
+                <input id="quote" type="radio" name="reason" value="quote" />
+                <label for="quote">Request a Quote</label>
+              </li>
+              <li>
+                <input
+                  id="consultation"
+                  type="radio"
+                  name="reason"
+                  value="consultation"
+                />
+                <label for="consultation">Consultation / General inquiry</label>
+              </li>
+              <li>
+                <input id="other" type="radio" name="reason" value="other" />
+                <label for="other">Other</label>
+              </li>
+            </ul>
+          </div>
+          <div class="form-group">
             <label for="message">Message</label>
             <textarea id="message" name="message" rows="5" required></textarea>
           </div>
@@ -94,6 +116,22 @@ import { Component } from '@angular/core';
       color: var(--mint-accent);
       margin-bottom: 1rem;
       font-family: 'Playfair Display', serif;
+    }
+    .radios {
+      display: flex;
+      flex-direction: column;
+      li {
+        list-style-type: none;
+        display: flex;
+        align-items: center;
+        input,
+        label {
+          width: auto;
+        }
+        input {
+          margin-right: 0.5rem;
+        }
+      }
     }
     .contact-details {
       list-style: none;

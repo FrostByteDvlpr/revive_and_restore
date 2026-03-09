@@ -16,11 +16,11 @@ import { RouterModule } from '@angular/router';
           <span></span><span></span><span></span>
         </button>
         <nav [class.open]="menuOpen">
-          <a routerLink="/">Home</a>
-          <a routerLink="/services">Services</a>
-          <a routerLink="/gallery">Gallery</a>
-          <a routerLink="/about">About</a>
-          <a routerLink="/contact">Contact</a>
+          <a (click)="menuOpen = !menuOpen" routerLink="/">Home</a>
+          <a (click)="menuOpen = !menuOpen" routerLink="/services">Services</a>
+          <a (click)="menuOpen = !menuOpen" routerLink="/gallery">Gallery</a>
+          <a (click)="menuOpen = !menuOpen" routerLink="/about">About</a>
+          <a (click)="menuOpen = !menuOpen" routerLink="/contact">Contact</a>
         </nav>
       </div>
     </header>

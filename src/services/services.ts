@@ -25,7 +25,7 @@ import { Component } from '@angular/core';
           </div>
           <div class="service-card">
             <h2>Flooring Installation</h2>
-            <p>Premium hardwood, vinyl, and luxury flooring solutions.</p>
+            <p>Premium hardwood, vinyl plank, and luxury flooring solutions.</p>
           </div>
           <div class="service-card">
             <h2>Basement Finishing</h2>
@@ -47,7 +47,7 @@ import { Component } from '@angular/core';
           </div>
           <div class="service-card">
             <h2>Full Home Renovations</h2>
-            <p>Complete transformations to bring your vision to life.</p>
+            <p>Complete transformations that bring your vision to life.</p>
           </div>
         </div>
       </div>
