@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
+  imports: [RouterModule],
   template: `
     <footer>
       <div class="container footer-grid">
@@ -10,9 +12,9 @@ import { Component } from '@angular/core';
           <p style="margin-bottom: 1rem;">
             Modern renovations designed with elegance and care.
           </p>
-          <a href="">About us</a>
-          <a href="">Gallery</a>
-          <a href="">Quote</a>
+          <a routerLink="/about">About us</a>
+          <a routerLink="/gallery">Gallery</a>
+          <a routerLink="/contact">Quote</a>
         </div>
 
         <div>
@@ -28,8 +30,7 @@ import { Component } from '@angular/core';
 
         <div>
           <h4>Contact</h4>
-          <p>Email: project@reviverestorereno.com</p>
-          <p>Phone: (555) 555-5555</p>
+          <p>Email: projects@reviverestorereno.com</p>
         </div>
       </div>
 

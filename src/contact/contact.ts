@@ -1,7 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ContactStore } from './contact.store';
+import { HttpClient, provideHttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-contact',
+  providers: [ContactStore],
+  imports: [FormsModule],
   template: `
     <section class="contact-hero">
       <div class="container">
@@ -12,6 +17,13 @@ import { Component } from '@angular/core';
         </p>
       </div>
     </section>
+
+    @if (contactStore.success()) {
+      <div class="alert alert-success" role="alert">
+        <strong>Success!</strong> Your message has been sent. We'll get back to
+        you soon.
+      </div>
+    }
 
     <section class="contact-form-section">
       <div class="container contact-form-grid">
@@ -28,49 +40,132 @@ import { Component } from '@angular/core';
                 projects@reviverestorereno.com</a
               >
             </li>
-            <li>
-              <strong>Phone:</strong>
-              <a href="tel:+1234567890"> (123) 456-7890</a>
-            </li>
-            <li><strong>Location:</strong> 123 Main St, Hometown, USA</li>
+            <li><strong>Location:</strong> Metro Detroit, MI</li>
           </ul>
         </div>
-        <form class="contact-form">
+        <form
+          class="contact-form"
+          #contactForm="ngForm"
+          (ngSubmit)="contactStore.submitForm()"
+        >
           <div class="form-group">
             <label for="name">Name</label>
-            <input id="name" name="name" type="text" required />
+            <input
+              id="name"
+              name="name"
+              [value]="contactStore.form().name"
+              (input)="onFieldChange('name', $event)"
+              [class.is-invalid]="contactStore.shouldShowError('name')"
+              (blur)="contactStore.markTouched('name')"
+              type="text"
+              required
+            />
+            @if (contactStore.shouldShowError('name')) {
+              <div class="invalid-feedback">
+                {{ contactStore.getError('name') }}
+              </div>
+            }
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input
+              id="phone"
+              name="phone"
+              [value]="contactStore.form().phone"
+              (input)="onFieldChange('phone', $event)"
+              [class.is-invalid]="contactStore.shouldShowError('phone')"
+              (blur)="contactStore.markTouched('phone')"
+              type="tel"
+              required
+            />
+            @if (contactStore.shouldShowError('phone')) {
+              <div class="invalid-feedback">
+                {{ contactStore.getError('phone') }}
+              </div>
+            }
           </div>
           <div class="form-group">
             <label for="email">Email</label>
-            <input id="email" name="email" type="email" required />
+            <input
+              id="email"
+              name="email"
+              [value]="contactStore.form().email"
+              (input)="onFieldChange('email', $event)"
+              [class.is-invalid]="contactStore.shouldShowError('email')"
+              (blur)="contactStore.markTouched('email')"
+              type="email"
+              required
+            />
+            @if (contactStore.shouldShowError('email')) {
+              <div class="invalid-feedback">
+                {{ contactStore.getError('email') }}
+              </div>
+            }
           </div>
           <div class="form-group">
             <label for="reason">Reason</label>
             <ul class="radios">
               <li>
-                <input id="quote" type="radio" name="reason" value="quote" />
+                <input
+                  id="quote"
+                  type="radio"
+                  (input)="onFieldChange('inquiryType', $event)"
+                  name="reason"
+                  value="quote"
+                />
                 <label for="quote">Request a Quote</label>
               </li>
               <li>
                 <input
                   id="consultation"
                   type="radio"
+                  (input)="onFieldChange('inquiryType', $event)"
                   name="reason"
                   value="consultation"
                 />
                 <label for="consultation">Consultation / General inquiry</label>
               </li>
               <li>
-                <input id="other" type="radio" name="reason" value="other" />
+                <input
+                  id="other"
+                  type="radio"
+                  (input)="onFieldChange('inquiryType', $event)"
+                  name="reason"
+                  value="other"
+                />
                 <label for="other">Other</label>
               </li>
             </ul>
+            @if (contactStore.shouldShowError('inquiryType')) {
+              <div class="invalid-feedback">
+                {{ contactStore.getError('inquiryType') }}
+              </div>
+            }
           </div>
           <div class="form-group">
             <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
+            <textarea
+              id="message"
+              name="message"
+              rows="5"
+              [value]="contactStore.form().message"
+              (input)="onFieldChange('message', $event)"
+              (blur)="contactStore.markTouched('message')"
+              [class.is-invalid]="contactStore.shouldShowError('message')"
+              required
+            ></textarea>
+            @if (contactStore.shouldShowError('message')) {
+              <div class="invalid-feedback">
+                {{ contactStore.getError('message') }}
+              </div>
+            }
           </div>
-          <button class="btn-primary" type="submit">Send Message</button>
+          <button class="btn-primary" type="submit">
+            @if (contactStore.loading()) {
+              <span class="spinner" aria-label="Loading"></span>
+            }
+            Send Message
+          </button>
         </form>
       </div>
     </section>
@@ -188,6 +283,29 @@ import { Component } from '@angular/core';
       border: 1.5px solid var(--mint-accent);
       outline: none;
     }
+    input.is-invalid,
+    textarea.is-invalid {
+      border-color: #ef4444 !important;
+    }
+    .invalid-feedback {
+      color: #ef4444;
+      font-size: 0.9rem;
+      margin-top: 0.3rem;
+    }
+    .alert {
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+      width: 100%;
+      text-align: center;
+    }
+
+    .alert-success {
+      background: #d1fae5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
     .btn-primary {
       background: var(--mint-accent);
       color: #fff;
@@ -208,6 +326,25 @@ import { Component } from '@angular/core';
     .btn-primary:hover {
       background: #6fa7a3;
       box-shadow: 0 4px 16px rgba(127, 185, 179, 0.18);
+    }
+    .spinner {
+      display: inline-block;
+      width: 1.2em;
+      height: 1.2em;
+      border: 2.5px solid #fff;
+      border-top: 2.5px solid var(--mint-accent);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      margin-right: 0.6em;
+      vertical-align: middle;
+    }
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
     }
     @media (max-width: 900px) {
       .contact-form-grid {
@@ -230,4 +367,14 @@ import { Component } from '@angular/core';
     }
   `,
 })
-export class ContactComponent {}
+export class ContactComponent {
+  readonly contactStore = inject(ContactStore);
+
+  onFieldChange(field: string, event: Event) {
+    const target = event.target as
+      | HTMLInputElement
+      | HTMLSelectElement
+      | HTMLTextAreaElement;
+    this.contactStore.updateField(field as any, target.value);
+  }
+}

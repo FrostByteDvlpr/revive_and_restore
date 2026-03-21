@@ -21,17 +21,32 @@ import { Component, signal, Signal } from '@angular/core';
           <div class="gallery-item" (click)="openLightbox('/reno_5.jpg')">
             <img src="/reno_5.jpg" alt="Renovation Project 2" />
           </div>
-          <div class="gallery-item wide" (click)="openLightbox('/reno_5.jpg')">
-            <img src="/reno_5.jpg" alt="Renovation Project 2" />
+          <div class="gallery-item wide" (click)="openLightbox('/reno10.jpeg')">
+            <img src="/reno10.jpeg" alt="Renovation Project 2" />
+          </div>
+          <div class="gallery-item" (click)="openLightbox('/reno11.jpeg')">
+            <img src="/reno11.jpeg" alt="Renovation Project 1" />
+          </div>
+          <div class="gallery-item tall" (click)="openLightbox('/reno12.jpeg')">
+            <img src="/reno12.jpeg" alt="Renovation Project 2" />
           </div>
           <div class="gallery-item" (click)="openLightbox('/reno_1.jpg')">
             <img src="/reno_1.jpg" alt="Renovation Project 1" />
           </div>
-          <div class="gallery-item tall" (click)="openLightbox('/reno_5.jpg')">
-            <img src="/reno_5.jpg" alt="Renovation Project 2" />
+          <div class="gallery-item" (click)="openLightbox('/IMG_0993.jpeg')">
+            <img src="/IMG_0993.jpeg" alt="Renovation Project 1" />
           </div>
-          <div class="gallery-item" (click)="openLightbox('/reno_1.jpg')">
-            <img src="/reno_1.jpg" alt="Renovation Project 1" />
+          <div class="gallery-item" (click)="openLightbox('/IMG_2714.JPG')">
+            <img src="/IMG_2714.JPG" alt="Renovation Project 1" />
+          </div>
+          <div class="gallery-item" (click)="openLightbox('/IMG_6856.jpeg')">
+            <img src="/IMG_6856.jpeg" alt="Renovation Project 1" />
+          </div>
+          <div class="gallery-item" (click)="openLightbox('/IMG_6959.jpeg')">
+            <img src="/IMG_6959.jpeg" alt="Renovation Project 1" />
+          </div>
+          <div class="gallery-item" (click)="openLightbox('/IMG_6961.jpeg')">
+            <img src="/IMG_6961.jpeg" alt="Renovation Project 1" />
           </div>
         </div>
         @if (lightboxImg()) {
