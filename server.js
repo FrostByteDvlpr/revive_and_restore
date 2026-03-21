@@ -12,7 +12,7 @@ const corsOpts = {
     const allowedOrigins = [
       "https://reviverestorereno.com",
       "https://www.reviverestorereno.com",
-      "https://revive-and-restore-4294f71fab38.herokuapp.com/",
+      "https://revive-and-restore-4294f71fab38.herokuapp.com",
       "http://localhost:4200",
       "http://localhost:5000",
     ];
