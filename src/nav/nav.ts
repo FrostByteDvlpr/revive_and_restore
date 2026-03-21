@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -7,7 +8,9 @@ import { RouterModule } from '@angular/router';
   template: `
     <header>
       <div class="container nav">
-        <div class="logo">Revive & Restore</div>
+        <div class="logo" (click)="navToHome()" style="cursor: pointer;">
+          <img src="/r&rname.png" alt="" />
+        </div>
         <button
           class="nav-toggle"
           (click)="menuOpen = !menuOpen"
@@ -39,11 +42,9 @@ import { RouterModule } from '@angular/router';
         position: relative;
       }
       .logo {
-        font-size: 2rem;
-        font-family: 'Playfair Display', serif;
-        color: var(--blue-grey);
-        font-weight: 700;
-        letter-spacing: 2px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
       }
       .nav-toggle {
         display: none;
@@ -81,6 +82,17 @@ import { RouterModule } from '@angular/router';
       nav a:hover {
         color: var(--mint-accent);
       }
+      .logo img {
+        max-width: 180px;
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      @media (max-width: 600px) {
+        .logo img {
+          max-width: 180px;
+        }
+      }
       @media (max-width: 800px) {
         .nav-toggle {
           display: flex;
@@ -95,7 +107,6 @@ import { RouterModule } from '@angular/router';
           background: var(--soft-panel);
           flex-direction: column;
           align-items: flex-end;
-          width: 100vw;
           max-height: 0;
           padding: 0;
           overflow: hidden;
@@ -126,4 +137,9 @@ import { RouterModule } from '@angular/router';
 })
 export class NavComponent {
   menuOpen = false;
+  readonly router = inject(Router);
+
+  navToHome() {
+    this.router.navigate(['/']);
+  }
 }

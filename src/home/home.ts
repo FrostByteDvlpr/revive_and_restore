@@ -46,8 +46,9 @@ import { RouterModule } from '@angular/router';
             fill="#1f2a2e11"
           />
         </svg>
-        <div class="glass-card animated-fade">
+        <div class="glass-card animated-fade mt-3">
           <h1 class="revamped-title">Transform Your Space</h1>
+
           <p class="revamped-subtitle">
             Luxury renovations, modern design, and craftsmanship that turns
             heads.
@@ -399,6 +400,9 @@ import { RouterModule } from '@angular/router';
       .services-grid.revamped {
         grid-template-columns: 1fr;
       }
+      .cta.revamped {
+        padding: 1rem !important;
+      }
     }
     @media (max-width: 600px) {
       .revamped-title {
@@ -637,7 +641,8 @@ import { RouterModule } from '@angular/router';
         align-items: stretch;
       }
       .about-content.revamped {
-        text-align: center;
+        text-align: left;
+        padding: 1.5rem;
       }
       .about-img.revamped {
         max-width: 100%;
@@ -645,6 +650,10 @@ import { RouterModule } from '@angular/router';
       }
       .container {
         width: 98%;
+      }
+      .process-grid.revamped {
+        gap: 1rem;
+        margin-top: 1.5rem;
       }
     }
     @media (max-width: 600px) {

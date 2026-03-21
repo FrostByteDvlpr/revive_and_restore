@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
 
 export const routes: Routes = [
   {
@@ -17,6 +18,7 @@ export const routes: Routes = [
   },
   {
     path: 'contact',
+    providers: [provideHttpClient()],
     loadComponent: () =>
       import('../contact/contact').then((m) => m.ContactComponent),
   },
