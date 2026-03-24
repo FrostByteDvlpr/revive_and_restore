@@ -121,6 +121,7 @@ import { Router } from '@angular/router';
           max-height: 400px;
           padding: 1rem 0.5rem;
           z-index: 1002;
+          width: 100%;
         }
         nav a {
           margin: 0.5rem 1rem;
